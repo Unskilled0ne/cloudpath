@@ -1,0 +1,233 @@
+{
+  "UserDetailList": [
+    {
+      "UserName": "dev-lambda-runner",
+      "Arn": "arn:aws:iam::123456789012:user/dev-lambda-runner",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "LambdaDevAccess",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "lambda:CreateFunction",
+                  "lambda:InvokeFunction",
+                  "iam:PassRole"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "MFADevices": [],
+      "AccessKeyMetadata": [
+        {
+          "AccessKeyId": "AKIAIOSFODNN7EXAMPLE",
+          "Status": "Active",
+          "CreateDate": "2021-04-12T10:15:30Z"
+        }
+      ]
+    },
+    {
+      "UserName": "intern-security",
+      "Arn": "arn:aws:iam::123456789012:user/intern-security",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "KeyManagerAccess",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "iam:CreateAccessKey",
+                  "iam:ListAccessKeys"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "MFADevices": [],
+      "AccessKeyMetadata": []
+    },
+    {
+      "UserName": "ci-deployer",
+      "Arn": "arn:aws:iam::123456789012:user/ci-deployer",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "SelfPolicyAttach",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "iam:AttachUserPolicy",
+                  "iam:PutUserPolicy"
+                ],
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "MFADevices": [],
+      "AccessKeyMetadata": []
+    },
+    {
+      "UserName": "audit-contractor",
+      "Arn": "arn:aws:iam::123456789012:user/audit-contractor",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "AssumeSupport",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "sts:AssumeRole",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "MFADevices": [],
+      "AccessKeyMetadata": []
+    },
+    {
+      "UserName": "admin-executive",
+      "Arn": "arn:aws:iam::123456789012:user/admin-executive",
+      "GroupList": [],
+      "AttachedManagedPolicies": [],
+      "UserPolicyList": [
+        {
+          "PolicyName": "FullAdmin",
+          "PolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "*",
+                "Resource": "*"
+              }
+            ]
+          }
+        }
+      ],
+      "MFADevices": [
+        {"SerialNumber": "arn:aws:iam::123456789012:mfa/admin-mfa"}
+      ],
+      "AccessKeyMetadata": []
+    }
+  ],
+  "RoleDetailList": [
+    {
+      "RoleName": "admin-compute-role",
+      "Arn": "arn:aws:iam::123456789012:role/admin-compute-role",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"Service": "lambda.amazonaws.com"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "AdminAccess",
+          "PolicyDocument": {
+            "Statement": [{"Effect": "Allow", "Action": "*", "Resource": "*"}]
+          }
+        }
+      ]
+    },
+    {
+      "RoleName": "staging-support-role",
+      "Arn": "arn:aws:iam::123456789012:role/staging-support-role",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::123456789012:user/audit-contractor"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "CanAssumeAdmin",
+          "PolicyDocument": {
+            "Statement": [{"Effect": "Allow", "Action": "sts:AssumeRole", "Resource": "*"}]
+          }
+        }
+      ]
+    },
+    {
+      "RoleName": "admin-breakglass-role",
+      "Arn": "arn:aws:iam::123456789012:role/admin-breakglass-role",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {"AWS": "arn:aws:iam::123456789012:role/staging-support-role"},
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "AdminAccess",
+          "PolicyDocument": {
+            "Statement": [{"Effect": "Allow", "Action": "*", "Resource": "*"}]
+          }
+        }
+      ]
+    },
+    {
+      "RoleName": "vendor-data-sync",
+      "Arn": "arn:aws:iam::123456789012:role/vendor-data-sync",
+      "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "AttachedManagedPolicies": [],
+      "RolePolicyList": [
+        {
+          "PolicyName": "FullReadWrite",
+          "PolicyDocument": {
+            "Statement": [{"Effect": "Allow", "Action": "*", "Resource": "*"}]
+          }
+        }
+      ]
+    }
+  ],
+  "GroupDetailList": [],
+  "Policies": []
+}
