@@ -1,4 +1,4 @@
-from typing import List, Dict, Any, Set
+from typing import List, Dict, Any, Set, Literal
 from pydantic import BaseModel
 from cloudpath.parser import IAMAuthorizationDetails, match_permission
 from cloudpath.graph import IAMAttackGraph
@@ -6,7 +6,7 @@ from cloudpath.graph import IAMAttackGraph
 class EscalationFinding(BaseModel):
     rule_id: str
     name: str
-    severity: str  # "CRITICAL", "HIGH", "MEDIUM"
+    severity: Literal["CRITICAL", "HIGH", "MEDIUM"]
     source_identity: str
     target_identity: str
     mitre_attack_id: str

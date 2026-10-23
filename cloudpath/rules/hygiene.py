@@ -1,12 +1,12 @@
 import re
-from typing import List
+from typing import List, Literal
 from pydantic import BaseModel
 from cloudpath.parser import IAMAuthorizationDetails
 
 class HygieneFinding(BaseModel):
     rule_id: str
     name: str
-    severity: str  # "HIGH", "MEDIUM", "LOW"
+    severity: Literal["HIGH", "MEDIUM", "LOW"]
     identity: str
     description: str
     remediation: str

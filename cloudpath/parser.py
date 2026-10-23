@@ -1,11 +1,11 @@
 import fnmatch
-from typing import Dict, Any, List, Set, Optional
+from typing import Dict, Any, List, Set, Optional, Literal
 from pydantic import BaseModel, Field
 
 class IAMIdentity(BaseModel):
     arn: str
     name: str
-    identity_type: str  # "User", "Role", "Group"
+    identity_type: Literal["User", "Role", "Group"]
     permissions: Set[str] = Field(default_factory=set)
     admin_privileges: bool = False
     trust_policy: Optional[Dict[str, Any]] = None
